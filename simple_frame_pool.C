@@ -100,12 +100,13 @@ void SimpleFramePool::release_frame(unsigned long _frame_no)
     //    The function is static, and you are only given a frame number. You do have
     //    to figure out which frame pool this frame belongs to before you can call the
     //    frame-pool-specific release_frame function.
-    
+
     
 #ifdef JUST_AS_EXAMPLE
     // Inside the frame-pool specific release_frame function we mark the frame
     // as released as follows:
-    
+        assert((_frame_no >= base_frame_no) && (_frame_no < base_frame_no + nframes));
+
     // The frame better be used before we release it.
     assert(get_state(_frame_no - base_frame_no) == FrameState::Used);
     
